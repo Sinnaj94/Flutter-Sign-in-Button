@@ -51,6 +51,9 @@ class SignInButtonBuilder extends StatelessWidget {
   /// width is default to be 1/1.5 of the screen
   final double? width;
 
+  /// isLoading is a bool field to specify whether button loads. This affects styling.
+  final bool isLoading;
+
   /// The constructor is self-explanatory.
   const SignInButtonBuilder({
     Key? key,
@@ -71,6 +74,7 @@ class SignInButtonBuilder extends StatelessWidget {
     this.shape,
     this.height,
     this.width,
+    this.isLoading = false
   }) : super(key: key);
 
   /// The build function will be help user to build the signin button widget.
@@ -113,6 +117,13 @@ class SignInButtonBuilder extends StatelessWidget {
                   const EdgeInsets.symmetric(
                     horizontal: 13,
                   ),
+              child: _getLoadingSpinner(),
+            ),
+            Padding(
+              padding: innerPadding ??
+                  const EdgeInsets.symmetric(
+                    horizontal: 13,
+                  ),
               child: _getIconOrImage(),
             ),
             Text(
@@ -139,5 +150,13 @@ class SignInButtonBuilder extends StatelessWidget {
       size: 20,
       color: iconColor,
     );
+  }
+
+  /// Get a spinner based on state Loading
+  Widget? _getLoadingSpinner() {
+    if(isLoading) {
+      return CircularProgressIndicator();
+    }
+    return null;
   }
 }
